@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  ThemeData getTheme() => ThemeData(colorSchemeSeed: Colors.blueGrey);
+  ThemeData getTheme() =>
+      ThemeData(colorSchemeSeed: const Color.fromARGB(255, 128, 176, 201));
 }
