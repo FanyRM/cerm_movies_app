@@ -20,6 +20,8 @@ class _HomeViewState extends ConsumerState<HomeView> {
 
   @override
   Widget build(BuildContext context) {
+    final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
+
     return CustomScrollView(
       slivers: [
         SliverAppBar(
@@ -34,8 +36,13 @@ class _HomeViewState extends ConsumerState<HomeView> {
           delegate: SliverChildBuilderDelegate((context, index) {
             return Column(
               children: [
-                MoviesSlideshow(movies: []),
-                Text('data'),
+                MoviesSlideshow(movies: nowPlayingMovies),
+                SizedBox(height: 20),
+                MovieHorizontalListview(
+                  movies: nowPlayingMovies,
+                  title: 'En cines',
+                  subtitle: 'A partir de',
+                ),
               ],
             );
           }),
