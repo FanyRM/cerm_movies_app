@@ -1,5 +1,6 @@
 import 'package:cerm_movies_app/config/config.dart';
 import 'package:cerm_movies_app/domain/domain.dart';
+import 'package:cerm_movies_app/infrastructure/infrastructure.dart';
 import 'package:cerm_movies_app/infrastructure/mappers/movie_mapper.dart';
 import 'package:cerm_movies_app/infrastructure/models/moviedb/moviedb_response.dart';
 import 'package:dio/dio.dart';
@@ -31,9 +32,15 @@ class MoviedbDatasourceImpl extends MoviesDatasource {
   }
 
   @override
-  Future<Movie> getMovieById(String id) {
-    // TODO: implement getMovieById
-    throw UnimplementedError();
+  Future<Movie> getMovieById(String id) async {
+    final response = await dio.get('/movie/$id');
+    if (response.statusCode != 200) {
+      throw Exception('Movie with id $id not found');
+    }
+
+    final datail = MovieDbDetail.fromJson(response.data);
+    final Movie movie = MovieMapper.movieDetailToEntity(datail);
+    return movie;
   }
 
   @override
