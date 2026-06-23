@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:cerm_movies_app/config/config.dart';
 import 'package:cerm_movies_app/domain/domain.dart';
 import 'package:cerm_movies_app/presentation/providers/providers.dart';
+import 'package:cerm_movies_app/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -60,12 +61,16 @@ class _MovieDetails extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Todo: Titulo, overview y rating
+        // Titulo, overview y rating
         _TitleAndOverview(movie: movie),
 
         // Todo: Generos de la pelicula
+        MovieGenres(movie: movie),
+
         // Todo: Actores de la pelicula
+
         // Todo: Trailers de la pelicula
+
         // Todo: Peliculas similares
       ],
     );
@@ -104,6 +109,10 @@ class _TitleAndOverview extends StatelessWidget {
                       ? movie.overview
                       : 'Sin información',
                 ),
+
+                SizedBox(height: 10),
+                MovieRating(voteAverage: movie.voteAverage),
+
                 Row(
                   children: [
                     Text(
