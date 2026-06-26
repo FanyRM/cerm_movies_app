@@ -21,6 +21,7 @@ class _MovieScreenState extends ConsumerState<MovieScreen> {
   void initState() {
     super.initState();
     ref.read(movieInfoProvider.notifier).loadMovie(widget.movieId);
+    ref.read(actorsByMovieProvider.notifier).loadActors(widget.movieId);
   }
 
   @override
@@ -68,6 +69,7 @@ class _MovieDetails extends StatelessWidget {
         MovieGenres(movie: movie),
 
         // Todo: Actores de la pelicula
+        ActorsByMovie(movieId: movie.id.toString()),
 
         // Todo: Trailers de la pelicula
 
@@ -87,7 +89,7 @@ class _TitleAndOverview extends StatelessWidget {
     final textStyle = Theme.of(context).textTheme;
 
     return Padding(
-      padding: EdgeInsetsGeometry.symmetric(horizontal: 8, vertical: 15),
+      padding: EdgeInsetsGeometry.symmetric(horizontal: 8),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

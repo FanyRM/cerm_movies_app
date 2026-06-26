@@ -1,6 +1,7 @@
 import 'package:cerm_movies_app/domain/domain.dart';
 
 abstract class MoviesDatasource {
+  Future<List<Actor>> getActorsByMovie(String movieId);
   Future<List<Movie>> getNowPlaying({int page = 1});
   Future<List<Movie>> getPopular({int page = 1});
   Future<List<Movie>> getUpcoming({int page = 1});
@@ -10,5 +11,5 @@ abstract class MoviesDatasource {
 
   Future<List<Movie>> searchMovie(String query);
   Future<List<Movie>> getSimilarMovie(String movieId);
-  Future<List<Movie>> getYoutubeVideoById(String id);
+  Future<List<dynamic>> getYoutubeVideoById(String movieId);
 }

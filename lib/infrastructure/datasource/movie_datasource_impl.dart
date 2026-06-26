@@ -1,8 +1,6 @@
 import 'package:cerm_movies_app/config/config.dart';
 import 'package:cerm_movies_app/domain/domain.dart';
 import 'package:cerm_movies_app/infrastructure/infrastructure.dart';
-import 'package:cerm_movies_app/infrastructure/mappers/movie_mapper.dart';
-import 'package:cerm_movies_app/infrastructure/models/moviedb/moviedb_response.dart';
 import 'package:dio/dio.dart';
 
 class MoviedbDatasourceImpl extends MoviesDatasource {
@@ -15,6 +13,19 @@ class MoviedbDatasourceImpl extends MoviesDatasource {
       },
     ),
   );
+
+  @override
+  Future<List<Actor>> getActorsByMovie(String movieId) async {
+    final response = await dio.get('/movie/$movieId/credits');
+
+    final credits = MovieDbCredits.fromJson(response.data);
+
+    List<Actor> actors = credits.cast
+        .map((cast) => ActorMapper.castToEntity(cast))
+        .toList();
+
+    return actors;
+  }
 
   @override
   Future<List<Movie>> getNowPlaying({int page = 1}) async {

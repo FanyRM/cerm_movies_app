@@ -36,12 +36,18 @@ class MovieRepositoryImpl extends MoviesRepository {
   }
 
   @override
-  Future<List<Movie>> getYoutubeVideoById(String id) {
-    return datasource.getYoutubeVideoById(id);
+  Future<List<dynamic>> getYoutubeVideoById(String movieId) {
+    return datasource.getYoutubeVideoById(movieId);
   }
 
   @override
   Future<List<Movie>> searchMovie(String query) {
     return datasource.searchMovie(query);
+  }
+
+  @override
+  Future<List<Actor>> getActorsByMovie(String movieId) {
+    // TODO: implement getActorsByMovie
+    throw UnimplementedError();
   }
 }
